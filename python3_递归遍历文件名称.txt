@@ -8,4 +8,4 @@ def gci(filepath):
       gci(fi_d)                  
     else:
       print (os.path.join(filepath,fi_d))
-gci("D:\\售前知识库\\02河南售前知识库\\014产品总结2017")
+gci("D:\\test1")
