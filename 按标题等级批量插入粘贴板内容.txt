@@ -1,0 +1,47 @@
+Sub 表格序列填数字()
+' 从上往下依次填写表格序号
+' 序列填数字 
+'
+Dim a As Integer
+For a = 35 To 50
+    Selection.TypeText Text:=a	'赋值为a
+    Selection.MoveDown Unit:=wdLine, Count:=1	'向下一行（如果有下一行的话)
+Next
+End Sub
+
+
+Sub 批量插入文本()
+'逐行判断是否为标题6，光标移至行尾，1、回车2、粘贴粘贴版内容
+'第一版
+Dim i As Integer
+For i = 1 To ActiveDocument.BuiltInDocumentProperties(wdPropertyLines).Value
+    With Selection
+         .GoTo What:=wdGoToLine, Which:=wdGoToAbsolute, Count:=i
+         '.HomeKey unit:=wdLine
+         .EndKey unit:=wdLine
+         '.EndKey Unit:=wdLine, Extend:=wdExtend
+    End With
+   If Selection.Style = "标题 6,第五层条,Bullet list,H6,PIM 6,L6,h6,ITT t6,PA Appendix,T6,6,61,62,Third Subheading,BOD 4,heading 6,Bullet list1,Bullet list2,Bullet list11,Bullet list3,Bullet list12,Bullet list21,Bullet list111,Bullet lis,l6,hsm,submodule heading,正文六级标题,sub-dash,sd,原始" Then
+       Selection.TypeParagraph ’回车
+       Selection.PasteAndFormat (wdFormatOriginalFormatting) '粘贴 粘贴板内容
+   End If
+Next
+ 
+End Sub
+
+Sub 批量插入文本()
+‘第二版
+Dim i As Integer
+For i = 1 To 297
+Selection.Find.Style = ActiveDocument.Styles("标题 6,第五层条,Bullet list,H6,PIM 6,L6,h6,ITT t6,PA Appendix,T6,6,61,62,Third Subheading,BOD 4,heading 6,Bullet list1,Bullet list2,Bullet list11,Bullet list3,Bullet list12,Bullet list21,Bullet list111,Bullet lis,l6,hsm,submodule heading,正文六级标题,sub-dash,sd,原始")
+Selection.Find.Execute
+    With Selection
+         '.GoTo What:=wdGoToLine, Which:=wdGoToAbsolute, Count:=i
+         '.HomeKey unit:=wdLine
+         .EndKey unit:=wdLine
+         '.EndKey Unit:=wdLine, Extend:=wdExtend
+    End With
+Selection.TypeParagraph '回车
+Selection.PasteAndFormat (wdFormatOriginalFormatting) '粘贴 粘贴板内容
+Next
+End Sub

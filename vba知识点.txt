@@ -1,0 +1,45 @@
+VBA数组
+ubound（arr,1) |　（arr,2)
+lbound
+
+arr = spilt("看看，快快，扣扣，咳咳","，") 'arr 索引从0开始一维数组
+
+txt = join(arr,"@") 'arr 只能是一维数组
+range("a1:a9").value = application.worksheetfunction.transpose(arr)
+application.workbooks("").worksheets("").range("a1").font.color
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

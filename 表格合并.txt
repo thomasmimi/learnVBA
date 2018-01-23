@@ -1,0 +1,14 @@
+Sub aaa()
+Dim i As Integer
+Dim j As Integer
+For i = 4 To 147	
+    ActiveSheet.Cells(i, 2).Value = Sheets(i).Name	'循环147个sheet，将147个的sheet名分别赋值给当前sheet的cells（i，2）
+    For j = 4 To 10000
+       If Len(Sheets(i).Cells(j, 1).Value) <> 0 Then	'147个sheet中的cells(j,1)单元个不为空时，执行下边赋值语句
+            ActiveSheet.Cells(i, 3).Value = ActiveSheet.Cells(i, 3) + "," + Sheets(i).Cells(j, 1)			       
+			             '合并sheet(i)的第一列从j行开始直到为空的所有单元格，且以","分割。把合并值赋值给当前sheet的cells(i,3)
+       End If
+       
+    Next
+Next
+End Sub

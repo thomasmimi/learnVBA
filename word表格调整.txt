@@ -1,0 +1,19 @@
+Sub 水平居中删除首行缩进()
+'
+' 表格调整 水平居中 删除缩进 字体设置宋体五号
+'
+'
+Dim t As Table
+For Each t In ActiveDocument.Tables
+    t.Select
+    Selection.ParagraphFormat.Alignment = wdAlignParagraphCenter '表格内容居中
+    Selection.Range.Cells.VerticalAlignment = wdCellAlignVerticalCenter
+    t.Range.ParagraphFormat.CharacterUnitFirstLineIndent = 0
+    t.Range.ParagraphFormat.FirstLineIndent = 0   '取消首行缩进
+    With Selection.Font
+       .Size = 11
+       .Name = "宋体"
+    End With
+       
+Next
+End Sub

@@ -1,0 +1,42 @@
+Sub pictest()
+'
+' 表格调整 水平居中 删除缩进 字体设置 
+' 图片居中 删除缩进
+' 删除空白行
+Dim t As Table, i, j, k As Integer, pic As InlineShape, para As Paragraph
+'j = 0
+For Each t In ActiveDocument.Tables
+    t.Select
+    j = j + 1
+    Selection.ParagraphFormat.Alignment = wdAlignParagraphCenter '表格内容居中
+    Selection.Range.Cells.VerticalAlignment = wdCellAlignVerticalCenter
+    t.Range.ParagraphFormat.CharacterUnitFirstLineIndent = 0
+    t.Range.ParagraphFormat.FirstLineIndent = 0  '取消首行缩进
+    With Selection.Font
+       .Size = 10
+       .Name = "宋体"
+    End With
+
+Next
+i = 0
+For Each pic In ActiveDocument.InlineShapes
+    '    If pic.Width > 480 Then
+'        pic.Width = 480
+'    End If
+    With pic.Range.ParagraphFormat
+        .CharacterUnitFirstLineIndent = 0
+        .FirstLineIndent = 0
+        .Alignment = wdAlignParagraphCenter
+    End With
+    i = i + 1
+Next
+'k = 0
+For Each para In ActiveDocument.Paragraphs
+    If Len(para.Range) = 1 Then
+        para.Range.Delete
+        k = k + 1
+    End If
+Next
+
+Debug.Print "处理了" & i; "个图片、" & j; "个表格;" & "删除了" & k; "个空行。"
+End Sub

@@ -1,0 +1,17 @@
+Sub 批量标题格式()
+'批量标题，偶数行为标题3，奇数行为标题2
+Dim i As Integer
+For i = 1 To 20:	'共20行
+    Selection.GoTo What:=wdGoToLine, Which:=wdGoToFirst, Count:=i, Name:=""    '光标移至i行
+    'Selection.EndKey Unit:=wdLine, Extend:=wdExtend						   '选中光标所在行
+    'With Selection.Font		'设置字体 大小15号，楷体_GB2312
+        '.Size = 15
+       '.Name = "楷体_GB2312"
+	'End With
+    If i Mod 2 = 0 Then					'奇偶判断
+        Selection.Style = ActiveDocument.Styles("标题 3")					'偶数行为标题3
+    Else
+        Selection.Style = ActiveDocument.Styles("标题 2")					'奇数行为标题2
+    End If
+Next
+End Sub

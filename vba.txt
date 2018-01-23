@@ -1,0 +1,199 @@
+1	最顶层application对象
+1.1	屏幕更新
+Application.screenupdating=flase’关闭屏幕更新
+Application.screenupdating=true’打开屏幕更新
+效果：程序运行完毕时才显示最后结果
+1.2	警告对话框
+Application.displayalerts=flase’关闭警告对话框
+Application.displayalerts=true’打开警告对话框
+效果：程序运行时不会弹出警告对话框
+1.3	更改excel工作界面
+Application.caption=”我的Excel”’标题栏
+Application.displayformulabar=false’编辑栏
+Application.displaystatusbar=false’状态栏
+Application.statusbar=”正在计算，请稍候……”’状态栏修改
+Application.statusbar=false’状态栏关闭
+Activewindow.displayheading=false’隐藏行标和列标
+1.4	子对象
+Application.workbooks(“book1”)’返回的是名称为“book1”的工作簿对象
+Application.workbooks(“book1”).worksheets(“sheet1”).range(“A1”)
+Application.selection.value=300’写入选中的单元格数据，application可省略不写
+Activecell’当前活动单元格
+Activechart’当前活动工作簿中的活动图表
+Activesheet’当前活动工作簿中的活动工作表
+Activewindow’当前活动窗口
+Charts’当前活动工作簿中所有的图表工作表
+Selection’当前活动工作簿中所有选中的对象
+Sheets’当前活动工作簿中所有的sheet对象，包括4类普通工作表、图表工作表、microsoft excel 4.0宏表工作表和5.0对话框工作表
+Worksheets’当前活动工作簿中的所有worksheet对象，即普通工作表
+Workbooks’当前所有打开的工作簿
+2	工作簿对象workbook
+2.1	工作簿引用
+1，使用索引号引用工作簿：workbooks.item(3)或workbooks(3)
+2，使用工作簿名引用工作簿：workbooks(“book1”)，如果系统设置显示已知文件扩展名，则：workbooks(“book1.xlsm”)
+2.2	工作簿属性
+Thisworkbook是代码所在的工作簿对象
+Range(“B2”)=thisworkbook.name’获得工作簿的名称
+Range(“B3”)=thisworkbook.path’获得工作簿文件所在的路径
+Range(“B4”)=thisworkbook.fullname’获得带路径的工作簿名称
+2.3	创建工作簿
+1，创建空白工作簿：workbooks.add
+2，指定模板创建工作普：workbooks.add template:=”D:\我的文件\模板.xlsm”，可简写成workbooks.add “D:\我的文件\模板.xlsm”
+3，新建工作簿包含指定工作表类型：workbooks.add template:=xlwbatchart’让新建的工作簿包含图表工作表，其中工作表类型有4种：
+Xlwbatworkbook’普通工作表
+Xlwbatchart’图表工作表
+Xlwbatexcel4macrosheet’microcoft excel4.0宏表工作表
+Xlwbraexcel4inlmacrosheet’microsoftexcel5.0对话框工作表
+2.4	打开工作簿
+Workbooks.open filename:=”D:\我的文件\模板.xlsm”可省略简写成workbooks.open “D:\我的文件\模板.xlsm”
+2.5	激活工作簿
+Workbooks(“工作簿1”).active
+2.6	保存工作簿
+1，thisworkbook.save’保存代码所在的工作簿
+2，thisworkbook.saveas filename:=”D:\test.xlsm”’将代码所在工作簿保存到D盘，如果省略路径，默认保存在当前文件夹中
+3，thisworkbook.savecopyas filename:=”D:\text.xlsm”’另存新文件后不关闭原文件
+2.7	关闭工作簿
+Workbooks.close’关闭当前打开的所有工作簿
+Workbooks(“book1”).close’关闭名称为book1的工作簿
+Workbooks(“book1”).close savechanges:=true’关闭保存对工作簿的修改，可简写成workbooks(“book1”).close true
+2.8	Thisworkbook与activeworkbook区别
+Thisworkbook指的是代码所在的工作簿
+Activeworkbook指的是当前活动工作簿
+3	工作表对象Worksheet
+3.1	引用工作表
+Worksheets.item(3)
+Worksheets(3)
+Worksheets(“excelhome”)
+Sheet3.range(“A1”)=100
+Msgbox activesheet.codename
+3.2	新建工作表
+Worksheets.add’在活动工作表前插入一张新工作表
+Worksheets.add befor:=worksheets(1)’在第一张工作表前插入一张新工作表
+Worksheets.add after:=worksheets(1)’在第一张工作表后插入一张新工作表
+Worksheets.add count:=3’在活动工作表前插入3张工作表
+Worksheets.Add before:=Worksheets(Worksheets.Count), Count:=2
+3.3	工作表属性
+Worksheets(2).name=”工资表”’将第2张工作表的标签名称更改为工资表
+Activesheet.name=”工资表”
+Worksheets.add(before:=worksheets(1)).name=”工资表”
+3.4	删除工作表
+Worksheets(“sheet1”).delete’删除标签名称为“sheet1”的工作表
+3.5	激活工作表
+Worksheets(1).active’激活活动工作簿中的第一张工作表
+Worksheets(1).select’激活活动工作簿中的第一张工作表
+区别：active只能激活一张，select可多选
+3.6	复制工作表
+1，复制到指定位置
+Worksheets(3).copy befor:=worksheets(1)’将第3张工作表复制到第1张工作表前
+Worksheets(2).copy after:=worksheet(3)’将第2张工作表复制到第3张工作表之后
+2，复制到新工作簿中
+Worksheets(1).copy’复制活动工作簿中的第一张工作表到新工作簿中
+复制得到的工作表总会成为活动工作表。在执行复制命令后，可直接使用activesheet引用它
+3.7	移动工作表
+Worksheets(3).move before:=worksheets(1)’将第3张工作表移动到第1张工作表前
+Worksheets(2).move after:=worksheets(3)’将第2张工作表移动到第3张工作表之后
+Worksheets(1).move’将第1张工作表移动到新工作簿中
+移动命令后，自动成为活动工作表
+3.8	工作表隐藏属性
+Worksheets(1).visible=false’隐藏活动工作表中的第一张工作表
+Worksheets(1).visible=xlsheethidden’隐藏活动工作簿中的第1张工作表
+Worksheets(1).visible=0
+三种代码效果一样
+Worksheets(1).visible=true
+Worksheets(1).visible=x1sheetvisible
+Worksheets(1).visible=1
+Worksheets(1).visible=-1
+显示工作表，效果一样
+3.9	访问count属性
+Worksheets.count’返回工作表数量，可保存在变量中
+Sheets指的是4种类型的工作表集合
+Worksheets指的是普通工作表的集合
+4	单元格对象Range
+4.1	引用单元格区域
+Range(“A1:A10”)’引用活动工作表中的A1：A10
+Dim n as string n=”A1:A10” range(n)
+Range(“A1:A10,A4:E6,C3:D9”).select’选中多个不连续的单元格区域
+Range(“B1:B10 A4:D6”).vlaue=100’在两个单元格区域的公共区域输入100
+Range(“B6:B10”,”D2:D8”).select’选中包含两块区域的最小区域
+4.2	Cells引用单元格
+Activesheet.Cells(3,4).value=20’在3行4列单元格中输入20
+Activesheet.cells(3,”D”).value=20
+单元格区域的某个单元格
+Range(“B3:F9”).cells(3.4).value=10’在B3:F9区域的第3行与第4列的单元格中输入10
+Range(cells(1,1),cells(10,5)).sclect’选中当前工作表的A1:E10单元格
+Range(“A1”,”E10”).select
+4.3	索引号引用单元格
+Activesheet.cells(1).value=200’在活动工作表的第2个单元格输入200
+Activesheet.cells.select’选中当前活动工作表中的所有工作表
+Range(“B3:F9”).cells.select’选中B3：F19单元格区域
+Cells只能引用一个单元格，range可以引用多个单元格
+4.4	引用整行单元格
+Activesheet.rows(“3:3”).select’选中活动工作表的第3行
+Activesheet.rows(“3:5”).select’选中活动工作表的第3行到第5行
+Activesheet.rows(3).select
+Activesheet.rows.select’选中所有行
+Rows(“3:10”).row(“1:1”).select’选中第3行到第10行区域中的第1行
+4.5	引用整列单元格
+Activesheet.columns(“F:G”).select
+Activesheet.columns(6).select
+Activesheet.columns.select
+Columns(“B:G”).columns(“B:B”).select
+4.6	用union方法合并多个单元格区域
+Application.union(range(“A1:A10”),range(“D1:D5”)).select’同时选中两个区域
+4.7	Offset属性
+Range(“A1”).offset(4,0).value=500’在A1下方的第四个单元格中输入数值500
+Range(“B2:C3”).offset(5.3).value=500’下方第五，再往右3
+Range(“B7:C8”).Offset(-5,-3).value=500’相反
+4.8	Resize属性
+Range(“B2”).resize(5,4).select’将B2扩展为一个5行4列的单元格区域
+Range(“B2:E6”).resize(2,1).select’将B2:E6单元格区域收缩为B2：B3的单元格区域，等效于Range(“B2:E6”).cells(1).resize(2,1).select’最终选择了2行1列的单元格区域。
+4.9	Usedrange属性
+Activesheet.usedrange.select’选中活动工作表中的已经使用的单元格区域
+4.10	Currentregion属性
+Range(“B5”).currentregion.selcet’选定连续的单元格区域
+Usedrange和currentregion的区别，usedrange可跨越中间的空行或空列，而currentregion不行，遇到空行或空列将消失。
+4.11	End属性
+Msgbox range(“c5”).end(xlup).address’用对话框显示end属性返回单元格的地址
+End属性返回的是区域最上方的单元格，一共有4种参数
+Xltoleft’等同于在单元格中按【end+左方向键】
+Xltoright’ 等同于在单元格中按【end+右方向键】
+Xlup’ 等同于在单元格中按【end+上方向键】
+Xldown’ 等同于在单元格中按【end+下方向键】
+注意，中间不能有空格，相当于currentregion
+Activesheet.range(“A65536”).end(xlup).offset(1,0).value=”liuwei”’找到第一个非空，然后下移一个单位
+4.12	Value属性
+Range(“A1:B2”).value=”abc”’在A1:B2中输入abc
+Range(“A1”).value=range(“B1”).value
+不建议使用range(“A1:B2”)=”ABC”
+4.13	Count属性
+Range(“B4:F10”).count’单元格区域里面一共有多少个单元格
+Activesheet.usedrange.rows.count’活动工作表中已使用区域包含的行数
+Activesheet.usedrange.columns.count’活动工作表中已使用区域包含的列数
+4.14	Address属性
+Selection.address’返回选择区域的单元格地址
+4.15	用activate和select选中单元格
+Activesheet.range(“A1:F5”).activate
+Activesheet.range(“A1:F5”).select’选中活动工作中的A1:F5
+4.16	清除数据
+Range(“A1”).clear’清除所有数据包括格式、内容、注视、批注等
+Range(“A1”).clearcomments’清除批注
+Range(“A1”).clearcontents’清除内容
+Range(“A1”).clearformats’清除格式
+4.17	Copy
+Range(“A1”).select
+Selection.copy
+Range(“B1”).select
+Activesheet.paste
+可简写成
+Range(“A1”).copy range(“B1”)
+Range(“A1”).currentregion.copy destination:=range(“B1”)
+4.18	CUT
+Range(“A1:E5”).cut destination:=range(“G1”)
+Range(“A1”).cut range(“G1”)
+Range(“A1:E10”).cut range(“G1”)
+4.19	Delete
+Range(“B5”).delete shift:=xltoleft’删除单元格，右侧单元格左移
+Range(“B5”).delete shift:=xlup’删除单元格，下方单元格上移
+Range(“B5”).entirerow.delete’删除B5单元格所在的行
+Range(“B5”).entirecolumn.delete’ 删除B5单元格所在的列
+Range(“B5”).delete’相当于Range(“B5”).delete shift:=xlup

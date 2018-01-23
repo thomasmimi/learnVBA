@@ -1,0 +1,16 @@
+Sub 操作目录()
+'
+' 操作目录 宏
+'
+
+    With ActiveDocument
+        .TablesOfContents.Add Range:=Selection.Range, RightAlignPageNumbers:= _
+            True, UseHeadingStyles:=True, UpperHeadingLevel:=1, _
+            LowerHeadingLevel:=9, IncludePageNumbers:=True, AddedStyles:="", _
+            UseHyperlinks:=True, HidePageNumbersInWeb:=True, UseOutlineLevels:= _
+            True
+    End With
+    ActiveDocument.TablesOfContents(1).Range.Select
+    Selection.Copy
+    
+End Sub

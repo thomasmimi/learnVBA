@@ -1,0 +1,12 @@
+Sub DelBlank()
+Dim i As Paragraph, n As Integer
+Application.ScreenUpdating = False
+For Each i In ActiveDocument.Paragraphs
+If Len(i.Range) = 1 Then
+i.Range.Delete
+n = n + 1
+End If
+Next
+MsgBox "共删除空白段落" & n & "个"
+Application.ScreenUpdating = True
+End Sub
