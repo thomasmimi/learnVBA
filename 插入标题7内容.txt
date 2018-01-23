@@ -3,7 +3,7 @@ Dim a As String
 Dim i As Integer
 Dim j As Integer
 For i = 1 To 144
-    Selection.Find.text = "代码转换模块"
+    Selection.Find.text = "1234"
     Selection.Find.Execute
     Selection.MoveRight Unit:=wdCharacter, Count:=1
         With Selection
@@ -11,7 +11,7 @@ For i = 1 To 144
 		End With
         With Selection.Find
                 .ClearFormatting
-				.Text = "主体身份代码，"
+				.Text = "12"
                 .Replacement.ClearFormatting
                 .Replacement.Text = ""
                 .Execute Replace:=wdReplaceAll, Forward:=True,Wrap:=wdFindContinue
