@@ -1,0 +1,20 @@
+Sub test()
+Dim m, n, i, j, total As Integer
+For n = 28 To 40    '循环省
+    For m = 28 To 41    '循环事项分类
+        total = 0       '重置汇总变量
+        For i = 2 To 13     '循环1月至12月，12个sheet，并汇总12个sheet中省(n)对应的事项(m)的数量综合
+            For j = 1 To 100    '循环单个sheet，并汇总单个sheet省(n)对应的事项(m)的数量
+                If Len(Sheets(i).Cells(j, 7).Value) <> 0 Then   'j行必须为非空才能继续
+                    If Sheets(i).Cells(j, 3) = Sheets(1).Cells(n, 5) And Sheets(i).Cells(j, 4) = Sheets(1).Cells(m, 1) Then  '（j,3)是n省并且（j,4)是事项(m)
+                        total = total + 1
+                    End If
+                End If
+            Next j
+        Next i
+        If total <> 0 Then          '本省无该事项则留空
+            Sheets(14).Cells(n - 3, m - 26).Value = total   '将汇总数据赋值到表格中
+        End If
+    Next m
+ Next n
+End Sub
