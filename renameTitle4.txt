@@ -1,0 +1,41 @@
+Sub renameTitle4()
+'
+Dim i As Integer
+   Dim aa As Variant
+
+aa = Split("", ",")
+For i = 0 To 19
+    Selection.Find.ClearFormatting
+    Selection.Find.Style = ActiveDocument.Styles("标题 4")
+    Selection.Find.Replacement.ClearFormatting
+    With Selection.Find
+        .Text = ""
+        .Replacement.Text = aa(i) & "^p"
+        .Forward = True
+        .Wrap = wdFindContinue
+        .Format = True
+        .MatchCase = False
+        .MatchWholeWord = False
+        .MatchByte = True
+        .MatchWildcards = False
+        .MatchSoundsLike = False
+        .MatchAllWordForms = False
+    End With
+    Selection.Find.Execute
+    With Selection
+        If .Find.Forward = True Then
+            .Collapse Direction:=wdCollapseStart
+        Else
+            .Collapse Direction:=wdCollapseEnd
+        End If
+        .Find.Execute Replace:=wdReplaceOne
+        If .Find.Forward = True Then
+            .Collapse Direction:=wdCollapseEnd
+        Else
+            .Collapse Direction:=wdCollapseStart
+        End If
+        .Find.Execute
+    End With
+Selection.MoveUp Unit:=wdLine, Count:=1
+    Next
+End Sub
