@@ -1,0 +1,14 @@
+
+Sub 删除表格行()
+Dim t As Table
+For Each t In ActiveDocument.Tables
+    t.Select
+    With Selection
+        .EndKey Unit:=wdLine
+        .MoveUp Unit:=wdLine, Count:=3, Extend:=wdExtend
+        .MoveLeft Unit:=wdCharacter, Count:=5, Extend:=wdExtend
+        .Cells.Delete ShiftCells:=wdDeleteCellsEntireRow
+        .TypeBackspace
+    End With
+Next
+End Sub
