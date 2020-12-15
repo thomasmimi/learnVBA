@@ -13,5 +13,6 @@ For Each t In ActiveDocument.Tables
     .PasteAndFormat (wdFormatOriginalFormatting) '粘贴 粘贴板内容
 	  .Rows.Delete
     .TypeBackspace
+    end with
 Next
 End Sub
