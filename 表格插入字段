@@ -1,0 +1,17 @@
+Sub 增加管理字段()
+'
+'
+'
+Dim t As Table
+For Each t In ActiveDocument.Tables
+    t.Select
+	 with selection
+	  .EndKey Unit:=wdLine
+    .MoveRight Unit:=wdCharacter, Count:=1
+    .InsertRows 1
+    .Collapse Direction:=wdCollapseStart
+    .PasteAndFormat (wdFormatOriginalFormatting) '粘贴 粘贴板内容
+	  .Rows.Delete
+    .TypeBackspace
+Next
+End Sub
