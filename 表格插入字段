@@ -1,6 +1,6 @@
 Sub 增加管理字段()
 '
-'
+'死循环  阿西吧
 '
 Dim t As Table
 For Each t In ActiveDocument.Tables
